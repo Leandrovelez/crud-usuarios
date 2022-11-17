@@ -37,8 +37,12 @@ class UsuarioController extends Controller
         $save = $this->usuarioRepository->store($user);
         
         if($save){
-            return redirect()->route('usuarios.index');
+            toastr()->success('Usuário cadastrado com sucesso!');
+        } else {
+            toastr()->error('Erro ao cadastrar o usuário!');
         }
+        
+        return redirect()->route('usuarios.index');
     }
 
     public function update(Request $request){
@@ -51,8 +55,12 @@ class UsuarioController extends Controller
         $save = $this->usuarioRepository->updateUser($user);
         
         if($save){
-            return view('index');
+            toastr()->success('Usuário atualizado com sucesso!');
+        } else {
+            toastr()->error('Erro ao atualizar o usuário!');
         }
+
+        return redirect()->route('usuarios.index');
     }
 
     public function delete($userId){

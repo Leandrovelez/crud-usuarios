@@ -17,24 +17,25 @@
         <div class="card-body">
             <div class="card-title fw-bold">Cadastrar novo usuário</div>
             <div class="d-flex justify-content-around">
-                <form action="{{route('usuarios.store')}}" method="POST">
+                <form action="{{route('usuarios.update')}}" method="POST">
                     @csrf
                     <div class="row">
+                        <input type="text" name="id" value="{{$user->id}}" hidden/>
                         <div class="col-sm-12 col-md-6 col-lg-6">
                             <label for="nome" class="form-label">Nome</label>
-                            <input type="text" name="nome" class="form-control mb-3"/>
+                            <input type="text" name="nome" class="form-control mb-3" value="{{$user->nome}}"/>
                         </div>
                         <div class="col-sm-12 col-md-6 col-lg-6">
                             <label for="email" class="form-label">email</label>
-                            <input type="text" name="email" class="form-control mb-3"/>
+                            <input type="text" name="email" class="form-control mb-3" value="{{$user->email}}"/>
                         </div>
                         <div class="col-sm-12 col-md-6 col-lg-6">
                             <label for="senha" class="form-label">senha</label>
-                            <input type="text" name="senha" class="form-control mb-3"/>
+                            <input type="password" name="senha" class="form-control mb-3" value="{{$user->senha}}"/>
                         </div>
                         <div class="col-sm-12 col-md-6 col-lg-6">
                             <label for="data_nascimento" class="form-label">Data nascimento</label>
-                            <input type="text" name="data_nascimento" class="form-control mb-3"/>
+                            <input type="text" name="data_nascimento" class="form-control mb-3" value="{{$user->data_nascimento}}"/>
                         </div>
                     </div>
                     <div class="row">

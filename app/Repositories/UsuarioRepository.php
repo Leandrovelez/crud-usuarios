@@ -13,7 +13,7 @@ class UsuarioRepository {
 
     public function getUserById($userId){
         $usuario = new Usuario;
-        return $usuario->getUserById();
+        return $usuario->getUserById($userId);
     }
 
     public function store($user){

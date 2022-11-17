@@ -33,7 +33,7 @@
                                 <td>{{$user->email}}</td>
                                 <td>{{$user->created_at}}</td>
                                 <td>
-                                    <a href="{{route('usuarios.edit', $user->id)}}">
+                                    <a href="{{route('usuarios.edit', $user->id)}}" class="text-decoration-none">
                                         <div class="btn btn-primary" title="editar">
                                             <i class="fa-solid fa-pen-to-square"></i>
                                         </div>
