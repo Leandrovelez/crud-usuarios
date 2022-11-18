@@ -13,15 +13,17 @@
     <title>HOME</title>
 </head>
 <body>
-    <div class="container justify-content pt-4">
+    <div class="container justify-content pt-4 mb-3">
         <div class="card">
             <div class="card-body">
                 <div class="d-flex justify-content-between">
                     <div class="card-title fw-bold">Lista de Usuário</div>
                     <div class="card-title fw-bold">
+                        @if(!$users->isEmpty())
                         <a href="{{route('usuarios.create')}}">
                             <div class="btn btn-sm btn-primary mt-2">Cadastrar novo usuário</div>
                         </a>
+                        @endif
                     </div>
                 </div>
                 @if(!$users->isEmpty())

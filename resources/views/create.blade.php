@@ -35,7 +35,7 @@
                             </div>
                             <div class="col-sm-12 col-md-6 col-lg-6 pt-3">
                                 <label for="senha" class="form-label">senha<small class="text-danger">*</small></label>
-                                <input type="text" name="senha" id="senha" class="form-control" required/>
+                                <input type="password" name="senha" id="senha" class="form-control" required/>
                             </div>
                             <div class="col-sm-12 col-md-6 col-lg-6 pt-3">
                                 <label for="data_nascimento" class="form-label">Data nascimento</label>
