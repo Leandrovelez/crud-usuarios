@@ -20,9 +20,9 @@ class UsuarioRepository {
         $usuario = new Usuario;
         return $usuario->store($user);
     }
-    public function updateUser($user){
+    public function updateUser($user, $userId){
         $usuario = new Usuario;
-        return $usuario->updateUser($user);
+        return $usuario->updateUser($user, $userId);
     }
     public function deleteUser($userId){
         $usuario = new Usuario;

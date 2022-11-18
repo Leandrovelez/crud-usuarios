@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Crypt;
+use Datetime;
 
 class Usuario extends Model
 {
@@ -25,8 +27,8 @@ class Usuario extends Model
         return $this->create($user);
     }
 
-    public function updateUser($user){
-        return $this->where('id', $user['id'])
+    public function updateUser($user, $userId){
+        return $this->where('id', $userId)
         ->update([
             'nome' => $user['nome'], 
             'email' => $user['email'],
@@ -37,5 +39,17 @@ class Usuario extends Model
     
     public function deleteUser($userId){
         return $this->where("id", $userId)->delete();
+    }
+
+    public function getSenha()
+    {
+        return Crypt::decryptString($this->senha);
+    }
+
+    public function getCreateDate()
+    {
+        $createdAtToDateTime = new DateTime($this->created_at);
+        $createdAtToBr = $createdAtToDateTime->format('d/m/Y');
+        return $createdAtToBr;
     }
 }

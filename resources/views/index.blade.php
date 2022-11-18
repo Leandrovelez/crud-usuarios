@@ -8,7 +8,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/8d70dac4bc.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
-    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <title>HOME</title>
 </head>
 <body>
@@ -38,7 +38,7 @@
                                             <i class="fa-solid fa-pen-to-square"></i>
                                         </div>
                                     </a>
-                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop" title="deletar">
+                                    <button type="button" class="btn btn-danger bg-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop" title="deletar">
                                         <i class="fa-solid fa-trash"></i>
                                     </button>
                                 </td>
@@ -53,33 +53,70 @@
                     <div class="btn btn-primary mt-2">Cadastrar novo usuário</div>
                 </a>
                 @endif
+                <div class="row mb-4">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                    {{ $users->links() }}
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
 
-<!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="staticBackdropLabel">Confirmar exclusão</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        Tem certeza que deseja deletar o registro?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary">Confirmar</button>
-      </div>
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Confirmar exclusão</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Tem certeza que deseja deletar o registro?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary bg-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary bg-primary">Confirmar</button>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
 </body>
 <style>
 body{
     background-color: #D3D3D3;
 }
 </style>
+<script>
+    $(document).ready(function () {
+        $("#form").submit(function (event) {
+            var formData = {
+                nome: $("#nome").val(),
+                email: $("#email").val(),
+                senha: $("#senha").val(),
+                data_nascimento: $("#data_nascimento").val(),
+            };
+
+            $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': "{{csrf_token()}}",
+            },
+            type: "POST",
+            url: "{{route('usuarios.delete')}}",
+            data: formData,
+            dataType: "json",
+            encode: true,
+            }).done(function (response) {
+                if (!response.success) {
+                    toastr.error(response.message)
+                } else {
+                    toastr.success(response.message)
+                    document.getElementById("form").reset()
+                }
+            })
+
+            event.preventDefault();
+        });
+    });
+</script>
 </html>

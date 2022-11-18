@@ -8,34 +8,39 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/8d70dac4bc.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
-    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
     <title>Cadastro</title>
 </head>
 <body>
 <div class="container justify-content pt-4">
     <div class="card">
         <div class="card-body">
-            <div class="card-title fw-bold">Cadastrar novo usuário</div>
+            <div class="d-flex justify-content-between">
+                <div class="card-title fw-bold">Cadastrar novo usuário</div>
+                <div class="card-title fw-bold">
+                    <small class="text-secondary">Data de criação: {{$user->getCreateDate()}}</small>
+                </div>
+            </div>
             <div class="d-flex justify-content-around">
-                <form action="{{route('usuarios.update')}}" method="POST">
+                <form action="" method="POST" id="formUpdate">
                     @csrf
                     <div class="row">
-                        <input type="text" name="id" value="{{$user->id}}" hidden/>
                         <div class="col-sm-12 col-md-6 col-lg-6">
                             <label for="nome" class="form-label">Nome</label>
-                            <input type="text" name="nome" class="form-control mb-3" value="{{$user->nome}}"/>
+                            <input type="text" name="nome" id="nome" class="form-control mb-3" value="{{$user->nome}}"/>
                         </div>
                         <div class="col-sm-12 col-md-6 col-lg-6">
                             <label for="email" class="form-label">email</label>
-                            <input type="text" name="email" class="form-control mb-3" value="{{$user->email}}"/>
+                            <input type="text" name="email" id="email" class="form-control mb-3" value="{{$user->email}}"/>
                         </div>
                         <div class="col-sm-12 col-md-6 col-lg-6">
                             <label for="senha" class="form-label">senha</label>
-                            <input type="password" name="senha" class="form-control mb-3" value="{{$user->senha}}"/>
+                            <input type="password" name="senha" id="senha" class="form-control mb-3" value="{{$user->getSenha()}}"/>
                         </div>
                         <div class="col-sm-12 col-md-6 col-lg-6">
                             <label for="data_nascimento" class="form-label">Data nascimento</label>
-                            <input type="text" name="data_nascimento" class="form-control mb-3" value="{{$user->data_nascimento}}"/>
+                            <input type="text" name="data_nascimento" id="data_nascimento" class="form-control mb-3" value="{{$user->data_nascimento}}"/>
                         </div>
                     </div>
                     <div class="row">
@@ -57,4 +62,35 @@ body{
     background-color: #D3D3D3;
 }
 </style>
+<script>
+    $(document).ready(function () {
+        $("#formUpdate").submit(function (event) {
+            var formData = {
+                nome: $("#nome").val(),
+                email: $("#email").val(),
+                senha: $("#senha").val(),
+                data_nascimento: $("#data_nascimento").val(),
+            };
+
+            $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': "{{csrf_token()}}",
+            },
+            type: "PUT",
+            url:"{{route('usuarios.update', $user->id)}}",
+            data: formData,
+            dataType: "json",
+            encode: true,
+            }).done(function (response) {
+                if (!response.success) {
+                    toastr.error(response.message)
+                } else {
+                    toastr.success(response.message)
+                }
+            })
+
+            event.preventDefault();
+        });
+    });
+</script>
 </html>
