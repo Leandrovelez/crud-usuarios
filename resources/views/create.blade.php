@@ -13,8 +13,8 @@
     <title>Cadastro</title>
 </head>
 <body>
-<div class="container justify-content pt-4">
-    <div class="card">
+<div class="container justify-content-center d-flex pt-4">
+    <div class="card" style="max-width: 936px">
         <div class="card-body">
             <div class="card-title fw-bold">Cadastrar novo usuário</div>
             <div class="d-flex justify-content-around">
