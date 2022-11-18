@@ -67,8 +67,8 @@ class UsuarioController extends Controller
         return response()->json($response);
     }
 
-    public function delete($userId){
-        $user = $this->usuarioRepository->deleteUser($userId);
+    public function delete($id){
+        $user = $this->usuarioRepository->deleteUser($id);
 
         $response = [];
         if($user){

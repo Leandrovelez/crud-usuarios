@@ -9,6 +9,6 @@ Route::controller(UsuarioController::class)->prefix('usuarios')->name('usuarios.
     Route::post('/store', 'store')->name('store');
     Route::get('/edit/{id}', 'edit')->name('edit');
     Route::put('/update/{id}', 'update')->name('update');
-    Route::delete('/delete/{id}', 'delete')->name('delete');
+    Route::get('/delete/{id}', 'delete')->name('delete');
 });
 
