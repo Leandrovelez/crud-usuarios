@@ -10,25 +10,47 @@ class UsuarioController extends Controller
 {
     private $usuarioRepository;
 
+    /**
+     * Instances the UserRepository
+     *
+     */
     public function __construct(UsuarioRepository $usuarioRepository){
         $this->usuarioRepository = $usuarioRepository;
     }
 
+    /**
+     * Return all the users for the index view
+     *
+     */
     public function getAllUsers(){
         $users = $this->usuarioRepository->getAllUsers();
         
         return view('index', compact('users'));
     }
 
+    /**
+     * Return the create view
+     *
+     */
     public function create(){
         return view('create');
     }
 
+    /**
+     * Return the edit view
+     *
+     */
     public function edit($usuarioId){
         $user = $this->usuarioRepository->getUserById($usuarioId);
         return view('edit', compact('user'));
     }
 
+    /**
+     * Store the user and return a json with the result and messsage
+     *
+     *
+     * @return json
+     */
     public function store(Request $request){
         $user['nome'] = $request->nome;
         $user['email'] = $request->email;
@@ -49,6 +71,12 @@ class UsuarioController extends Controller
         return response()->json($response);
     }
 
+    /**
+     * Update the user and return a json with the result and messsage
+     *
+     *
+     * @return json
+     */
     public function update(Request $request, $id){
         $user['nome'] = $request->nome;
         $user['email'] = $request->email;
@@ -67,6 +95,12 @@ class UsuarioController extends Controller
         return response()->json($response);
     }
 
+    /**
+     * Delete the user and return a json with the result and messsage
+     *
+     *
+     * @return json
+     */
     public function delete($id){
         $user = $this->usuarioRepository->deleteUser($id);
 
