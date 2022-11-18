@@ -10,6 +10,7 @@
     <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+    <script type="text/javascript" src="{{ asset('../../js/jquery.mask.js') }}"></script>
     <title>Cadastro</title>
 </head>
 <body>
@@ -57,8 +58,10 @@ body{
     background-color: #D3D3D3;
 }
 </style>
+
 <script>
     $(document).ready(function () {
+        $('#data_nascimento').mask('00/00/0000');
         $("#form").submit(function (event) {
             var formData = {
                 nome: $("#nome").val(),
