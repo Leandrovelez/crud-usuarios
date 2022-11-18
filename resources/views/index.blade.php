@@ -8,7 +8,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/8d70dac4bc.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
     <title>HOME</title>
@@ -17,7 +16,14 @@
     <div class="container justify-content pt-4">
         <div class="card">
             <div class="card-body">
-                <div class="card-title fw-bold">Lista de usuários</div>
+                <div class="d-flex justify-content-between">
+                    <div class="card-title fw-bold">Lista de Usuário</div>
+                    <div class="card-title fw-bold">
+                        <a href="{{route('usuarios.create')}}">
+                            <div class="btn btn-sm btn-primary mt-2">Cadastrar novo usuário</div>
+                        </a>
+                    </div>
+                </div>
                 @if(!$users->isEmpty())
                 <table class="table table-hover">
                     <thead>
@@ -55,10 +61,8 @@
                     <div class="btn btn-primary mt-2">Cadastrar novo usuário</div>
                 </a>
                 @endif
-                <div class="row mb-4">
-                    <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class=" d-flex justify-content-center">
                     {{ $users->links() }}
-                    </div>
                 </div>
             </div>
         </div>
