@@ -80,7 +80,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    Tem certeza que deseja deletar o registro?
+                    Tem certeza que deseja deletar o registro <label id="registroId"></label>?
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary bg-secondary" data-bs-dismiss="modal">Cancelar</button>
@@ -111,6 +111,7 @@ body{
         rota = rota.replace('/0', '/'+idUsuario)
         
         $('#deleteConfirm').attr("data-rota", rota );
+        $('#registroId').text( idUsuario );
         
     })
 
