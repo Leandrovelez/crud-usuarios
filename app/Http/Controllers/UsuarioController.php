@@ -11,7 +11,7 @@ class UsuarioController extends Controller
     private $usuarioRepository;
 
     /**
-     * Instances the UserRepository
+     * Creates the UserRepository
      *
      */
     public function __construct(UsuarioRepository $usuarioRepository){
@@ -19,7 +19,7 @@ class UsuarioController extends Controller
     }
 
     /**
-     * Return all the users for the index view
+     * Return the index view with all users
      *
      */
     public function getAllUsers(){
@@ -39,6 +39,7 @@ class UsuarioController extends Controller
     /**
      * Return the edit view
      *
+     *@param integer $usuarioId is the Id of the user
      */
     public function edit($usuarioId){
         $user = $this->usuarioRepository->getUserById($usuarioId);
@@ -48,6 +49,7 @@ class UsuarioController extends Controller
     /**
      * Store the user and return a json with the result and messsage
      *
+     *@param Request $request
      *
      * @return json
      */
@@ -74,7 +76,8 @@ class UsuarioController extends Controller
     /**
      * Update the user and return a json with the result and messsage
      *
-     *
+     *@param integer $id is the Id of the user, Request $request
+     * 
      * @return json
      */
     public function update(Request $request, $id){
@@ -98,7 +101,8 @@ class UsuarioController extends Controller
     /**
      * Delete the user and return a json with the result and messsage
      *
-     *
+     *@param integer $id is the Id of the user
+     * 
      * @return json
      */
     public function delete($id){

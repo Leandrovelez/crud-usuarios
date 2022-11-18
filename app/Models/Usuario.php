@@ -48,6 +48,7 @@ class Usuario extends Model
     /**
      * Update the user.
      *
+     * @param integer $userId is the Id of the user, $user is the user
      *
      * @return collection
      */
@@ -64,6 +65,7 @@ class Usuario extends Model
     /**
      * Delete the user.
      *
+     * @param integer $userId is the Id of the user
      *
      * @return collection
      */
@@ -74,8 +76,7 @@ class Usuario extends Model
     /**
      * Decrypt the password for the edit form.
      *
-     *
-     * @return collection
+     * @return string
      */
     public function getSenha()
     {
@@ -86,7 +87,7 @@ class Usuario extends Model
      * Applys the BR format for the date.
      *
      *
-     * @return collection
+     * @return dateTime
      */
     public function getCreateDate()
     {
